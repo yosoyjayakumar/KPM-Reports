@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalasapakkam Reports</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        h1 {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            border: none;
+            cursor: pointer;
+            min-width: 200px;
+            text-transform: uppercase;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            background: linear-gradient(45deg, #ff5252, #ff7979);
+        }
+
+        .btn:active {
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(45deg, #4ecdc4, #44a08d);
+        }
+
+        .btn-secondary:hover {
+            background: linear-gradient(45deg, #26de81, #20bf6b);
+        }
+
+        .btn-tertiary {
+            background: linear-gradient(45deg, #a29bfe, #6c5ce7);
+        }
+
+        .btn-tertiary:hover {
+            background: linear-gradient(45deg, #fd79a8, #e84393);
+        }
+
+        .btn-back {
+            background: linear-gradient(45deg, #74b9ff, #0984e3);
+            margin-top: 2rem;
+            min-width: 150px;
+        }
+
+        .btn-back:hover {
+            background: linear-gradient(45deg, #55a3ff, #0770c7);
+        }
+
+        .page-content {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 1rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .page-content h2 {
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .page-content p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .feature-list {
+            text-align: left;
+            color: rgba(255, 255, 255, 0.9);
+            margin: 1rem 0;
+        }
+
+        .feature-list li {
+            margin: 0.5rem 0;
+            padding-left: 1rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .btn {
+                padding: 12px 30px;
+                font-size: 1rem;
+                min-width: 180px;
+            }
+
+            .button-container {
+                gap: 1.2rem;
+            }
+
+            body {
+                padding: 15px;
+            }
+
+            .page-content {
+                padding: 1.5rem;
+            }
+
+            .page-content h2 {
+                font-size: 1.7rem;
+            }
+
+            .page-content p {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.7rem;
+            }
+
+            .btn {
+                padding: 10px 25px;
+                font-size: 0.9rem;
+                min-width: 160px;
+            }
+
+            .button-container {
+                gap: 1rem;
+            }
+
+            .page-content {
+                padding: 1rem;
+            }
+        }
+
+        /* Desktop - Optional horizontal layout for larger screens */
+        @media (min-width: 992px) {
+            .button-container {
+                flex-direction: row;
+                justify-content: center;
+                gap: 2rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .container {
+            animation: fadeInUp 0.8s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Home Page -->
+        <div id="home" class="page active">
+            <h1>Kalasapakkam Reports</h1>
+            <div class="button-container">
+                <button onclick="showPage('KKI24')" class="btn">
+                    🏠 KKI 2024-25
+                </button>
+                <button onclick="showPage('KKI25')" class="btn btn-secondary">
+                    🏠 KKI 2025-26
+                </button>
+                <button onclick="showPage('MVMT25')" class="btn btn-tertiary">
+                    🏠 MVMT 2025-26
+                </button>
+            </div>
+        </div>
+
+        <!-- KKI24 Page -->
+        <div id="KKI24" class="page">
+            <h1>Kalaignarin Kanavu Illam <br> 2024-25</h1>
+            <div class="page-content">
+                               
+                <!-- <ul class="feature-list">
+                    <li>🚀 Web Development & Design</li>
+                    <li>📱 Mobile App Development</li>
+                </ul> -->
+
+                <h2>Incharge Wise</h2>
+                <div class="button-container">
+                    <a href="https://www.google.com/" class="btn">
+                        View
+                    </a>
+                     <a href="https://www.google.com/" class="btn btn-secondary">
+                        Download
+                    </a>
+                </div>
+            </div>
+            <div class="page-content">
+                               
+                <!-- <ul class="feature-list">
+                    <li>🚀 Web Development & Design</li>
+                    <li>📱 Mobile App Development</li>
+                </ul> -->
+                <h2>Panchayat Wise</h2>
+                <div class="button-container">
+                    <a href="https://www.google.com/" class="btn">
+                        View
+                    </a>
+                     <a href="https://www.google.com/" class="btn btn-secondary">
+                        Download
+                    </a>
+                </div>
+            </div>
+            <button onclick="showPage('home')" class="btn btn-back">
+                ← Back to Home
+            </button>
+        </div>
+
+        <!-- KKI25 Page -->
+        <div id="KKI25" class="page">
+            <h1>Kalaignarin Kanavu Illam <br> 2025-26</h1>
+            <div class="page-content">
+                               
+                <!-- <ul class="feature-list">
+                    <li>🚀 Web Development & Design</li>
+                    <li>📱 Mobile App Development</li>
+                </ul> -->
+
+                <h2>Incharge Wise</h2>
+                <div class="button-container">
+                    <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vTG1Tlrzlv9FOhkuPhIrO4AeSYnrOOz5zM19NxWeipAPdU7GDBhBDiPG5lUH8-dDUPyfGUpCEyIYMqz/pubhtml?gid=1075624762&single=true" class="btn">
+                        View
+                    </a>
+                     <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vTG1Tlrzlv9FOhkuPhIrO4AeSYnrOOz5zM19NxWeipAPdU7GDBhBDiPG5lUH8-dDUPyfGUpCEyIYMqz/pub?gid=1075624762&single=true&output=pdf" class="btn btn-secondary">
+                        Download
+                    </a>
+                </div>
+            </div>
+            <div class="page-content">
+                               
+                <!-- <ul class="feature-list">
+                    <li>🚀 Web Development & Design</li>
+                    <li>📱 Mobile App Development</li>
+                </ul> -->
+                <h2>Panchayat Wise</h2>
+                <div class="button-container">
+                    <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vTG1Tlrzlv9FOhkuPhIrO4AeSYnrOOz5zM19NxWeipAPdU7GDBhBDiPG5lUH8-dDUPyfGUpCEyIYMqz/pubhtml?gid=911036524&single=true" class="btn">
+                        View
+                    </a>
+                     <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vTG1Tlrzlv9FOhkuPhIrO4AeSYnrOOz5zM19NxWeipAPdU7GDBhBDiPG5lUH8-dDUPyfGUpCEyIYMqz/pub?gid=911036524&single=true&output=pdf" class="btn btn-secondary">
+                        Download
+                    </a>
+                </div>
+            </div>
+            <div class="page-content">
+                               
+                <!-- <ul class="feature-list">
+                    <li>🚀 Web Development & Design</li>
+                    <li>📱 Mobile App Development</li>
+                </ul> -->
+                <h2>Cement & Steel</h2>
+                <div class="button-container">
+                    <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vTG1Tlrzlv9FOhkuPhIrO4AeSYnrOOz5zM19NxWeipAPdU7GDBhBDiPG5lUH8-dDUPyfGUpCEyIYMqz/pubhtml?gid=1101792617&single=true" class="btn">
+                        View
+                    </a>
+                     <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vTG1Tlrzlv9FOhkuPhIrO4AeSYnrOOz5zM19NxWeipAPdU7GDBhBDiPG5lUH8-dDUPyfGUpCEyIYMqz/pub?gid=1101792617&single=true&output=pdf" class="btn btn-secondary">
+                        Download
+                    </a>
+                </div>
+            </div>
+            <button onclick="showPage('home')" class="btn btn-back">
+                ← Back to Home
+            </button>
+    </div>
+
+    <!-- MVMT25 Page -->
+        <div id="MVMT25" class="page">
+            <h1>Muthalamaicharin Veedugal Marukattumana Thittam <br> 2025-26</h1>
+            <div class="page-content">
+                               
+                <!-- <ul class="feature-list">
+                    <li>🚀 Web Development & Design</li>
+                    <li>📱 Mobile App Development</li>
+                </ul> -->
+
+                <h2>Incharge Wise</h2>
+                <div class="button-container">
+                    <a href="https://www.google.com/" class="btn">
+                        View
+                    </a>
+                     <a href="https://www.google.com/" class="btn btn-secondary">
+                        Download
+                    </a>
+                </div>
+            </div>
+            <div class="page-content">
+                               
+                <!-- <ul class="feature-list">
+                    <li>🚀 Web Development & Design</li>
+                    <li>📱 Mobile App Development</li>
+                </ul> -->
+                <h2>Panchayat Wise</h2>
+                <div class="button-container">
+                    <a href="https://www.google.com/" class="btn">
+                        View
+                    </a>
+                     <a href="https://www.google.com/" class="btn btn-secondary">
+                        Download
+                    </a>
+                </div>
+            </div>
+            <div class="page-content">
+                               
+                <!-- <ul class="feature-list">
+                    <li>🚀 Web Development & Design</li>
+                    <li>📱 Mobile App Development</li>
+                </ul> -->
+                <h2>Cement & Steel</h2>
+                <div class="button-container">
+                    <a href="https://www.google.com/" class="btn">
+                        View
+                    </a>
+                     <a href="https://www.google.com/" class="btn btn-secondary">
+                        Download
+                    </a>
+                </div>
+            </div>
+            <button onclick="showPage('home')" class="btn btn-back">
+                ← Back to Home
+            </button>
+    </div>
+
+    <script>
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show the selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Scroll to top for better UX
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Optional: Add keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                showPage('home');
+            }
+        });
+    </script>
+</body>
+</html>

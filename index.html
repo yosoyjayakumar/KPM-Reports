@@ -2,15 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kalasapakkam Reports</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>KPM Reports</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Cambira, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -228,16 +231,20 @@
         .container {
             animation: fadeInUp 0.8s ease-out;
         }
-                .iframe-fullscreen {
+        .iframe-fullscreen {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
+            /* Use dvh for better mobile support */
+            height: 100dvh; 
             background: #ffffff;
             z-index: 1000;
             display: none;
-            -webkit-overflow-scrolling: touch; /* For smooth scrolling on iOS */
+            -webkit-overflow-scrolling: touch;
+            /* Prevent zoom on mobile */
+            touch-action: manipulation;
         }
 
         .iframe-fullscreen iframe {
@@ -250,17 +257,17 @@
 
         .close-button {
             position: fixed;
-            top: 10px;
-            right: 10px;
+            top: 50px;
+            right: 50px;
             z-index: 1001;
-            background: #ff6b6b;
+            background: #ff0000;
             color: white;
             border: none;
             padding: 8px 16px;
-            border-radius: 20px;
+            border-radius: 5px;
             cursor: pointer;
             box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-            font-size: 14px;
+            font-size: 20px;
         }
 
         /* Add these media queries for mobile responsiveness */
@@ -277,10 +284,10 @@
             }
 
             .close-button {
-                top: 5px;
-                right: 5px;
+                top: 10px;
+                right: 10px;
                 padding: 6px 12px;
-                font-size: 12px;
+                font-size: 16px;
             }
         }
     </style>
@@ -307,30 +314,40 @@
         <div id="KKI24" class="page">
             <h1>Kalaignarin Kanavu Illam <br> 2024-25</h1>
            
-                               
-                <!-- <ul class="feature-list">
-                    <li>🚀 Web Development & Design</li>
-                    <li>📱 Mobile App Development</li>
-                </ul> -->
-
-            <h2>Incharge Wise</h2>
-                <div class="button-container">
-                    <button onclick="openFullscreen('iframe-incharge')" class="btn">
-                        View
-                    </button>
-                    <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vTG1Tlrzlv9FOhkuPhIrO4AeSYnrOOz5zM19NxWeipAPdU7GDBhBDiPG5lUH8-dDUPyfGUpCEyIYMqz/pub?gid=1075624762&single=true&output=pdf" class="btn btn-secondary" download>
-                        Download
-                    </a>
-                </div>
+            <div class="page-content">
+                
+                <h2>Incharge Wise</h2>
+                    <div class="button-container">
+                        <button onclick="openFullscreen('iframe-incharge')" class="btn">
+                            View
+                        </button>
+                        <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vTC_vMOeMy_GiW80ickJF-VDUt-0NE2vfu6BDk5vE1G57W3pCNSO5kpj0R361DhvQ0aWHdWZCufSvx4/pub?gid=1642614200&single=true&output=pdf" class="btn btn-secondary" download>
+                            Download
+                        </a>
+                    </div>
+                <h2>Panchayat Wise</h2>
+                    <div class="button-container">
+                        <button onclick="openFullscreen('iframe-panchayat')" class="btn">
+                            View
+                        </button>
+                        <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vTC_vMOeMy_GiW80ickJF-VDUt-0NE2vfu6BDk5vE1G57W3pCNSO5kpj0R361DhvQ0aWHdWZCufSvx4/pub?gid=402062437&single=true&output=pdf" class="btn btn-secondary" download>
+                            Download
+                        </a>
+                    </div>
+            </div>
                 <div class="iframe-fullscreen" id="iframe-incharge">
                     <button onclick="closeFullscreen('iframe-incharge')" class="close-button">
-                    Close ×
+                    Close
                     </button>
-                    <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTG1Tlrzlv9FOhkuPhIrO4AeSYnrOOz5zM19NxWeipAPdU7GDBhBDiPG5lUH8-dDUPyfGUpCEyIYMqz/pubhtml?gid=1075624762&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
+                    <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTC_vMOeMy_GiW80ickJF-VDUt-0NE2vfu6BDk5vE1G57W3pCNSO5kpj0R361DhvQ0aWHdWZCufSvx4/pubhtml?gid=1642614200&single=true"></iframe>
                 </div>
-                <button onclick="showPage('home')" class="btn btn-back">
-                ← Back to Home
-                </button>
+                <div class="iframe-fullscreen" id="iframe-panchayat">
+                    <button onclick="closeFullscreen('iframe-panchayat')" class="close-button">
+                    Close
+                    </button>
+                    <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTC_vMOeMy_GiW80ickJF-VDUt-0NE2vfu6BDk5vE1G57W3pCNSO5kpj0R361DhvQ0aWHdWZCufSvx4/pubhtml?gid=402062437&single=true"></iframe>
+                </div>
+            <button onclick="showPage('home')" class="btn btn-back">← Back to Home</button>
         </div>
 
         <!-- KKI25 Page -->
